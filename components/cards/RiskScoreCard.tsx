@@ -1,0 +1,4 @@
+import type { RiskScore } from "@/lib/types";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RiskBadge } from "@/components/shared/RiskBadge";
+export function RiskScoreCard({ title, risk }: { title: string; risk: RiskScore }) { return <Card><CardHeader className="pb-3"><div className="flex items-center justify-between"><CardTitle>{title}</CardTitle><RiskBadge level={risk.level} /></div></CardHeader><CardContent><div className="text-4xl font-bold">{risk.score}<span className="text-base text-muted-foreground">/100</span></div><div className="mt-4 h-2 rounded bg-muted"><div className="h-2 rounded bg-primary" style={{ width: `${risk.score}%` }} /></div><ul className="mt-4 space-y-1 text-xs text-muted-foreground">{risk.factors.slice(0,3).map((f) => <li key={f.label} className="flex justify-between"><span>{f.label}</span><span>{f.description ?? Math.round(f.value)}</span></li>)}</ul></CardContent></Card>; }

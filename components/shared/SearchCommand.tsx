@@ -1,0 +1,10 @@
+"use client";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { searchCountries } from "@/lib/api/countries";
+import { searchLocations } from "@/lib/api/openmeteo";
+import { getWikipediaSummary } from "@/lib/api/countries";
+import type { SearchResult } from "@/lib/types";
+import { useAppStore } from "@/store/useAppStore";
+export function SearchCommand() { const [q, setQ] = useState(""); const add = useAppStore((s) => s.addSearch); const recent = useAppStore((s) => s.recentSearches); const query = useQuery({ queryKey: ["global-search", q], enabled: q.length > 2, queryFn: async () => { const [countries, cities, wiki] = await Promise.all([searchCountries(q), searchLocations(q), getWikipediaSummary(q)]); const results: SearchResult[] = [...countries.data.slice(0,4).map((c) => ({ id: `country-${c.cca3}`, type: "country" as const, title: c.name, subtitle: c.region, coordinates: c.latlng, payload: c })), ...cities.data.slice(0,4).map((c) => ({ id: `city-${c.id}`, type: "city" as const, title: c.name, subtitle: [c.admin1, c.country].filter(Boolean).join(", "), coordinates: [c.latitude, c.longitude] as [number, number], payload: c })), { id: `wiki-${q}`, type: "wikipedia" as const, title: wiki.data.title, subtitle: wiki.data.extract.slice(0, 120), payload: wiki.data }]; return results; } }); const results = q.length > 2 ? query.data ?? [] : recent; return <div className="space-y-4"><Input value={q} onChange={(e) => setQ(e.target.value)} autoFocus placeholder="Search countries, cities, earthquakes, Wikipedia topics..." /><div className="grid gap-3 md:grid-cols-2">{results.map((r) => <button key={r.id} onClick={() => add(r)} className="rounded-lg border p-4 text-left hover:bg-secondary"><div className="text-xs uppercase text-primary">{r.type}</div><div className="font-semibold">{r.title}</div><div className="line-clamp-2 text-sm text-muted-foreground">{r.subtitle}</div></button>)}</div></div>; }
