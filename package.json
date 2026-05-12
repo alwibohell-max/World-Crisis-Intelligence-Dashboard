@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "latest",
     "@tanstack/react-query": "latest",
     "class-variance-authority": "latest",
     "clsx": "latest",
@@ -26,7 +27,6 @@
     "zustand": "latest"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "latest",
     "@types/leaflet": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
