@@ -1,0 +1,45 @@
+@import "leaflet/dist/leaflet.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+  --card: 222 39% 9%;
+  --card-foreground: 210 40% 98%;
+  --muted: 217 32% 17%;
+  --muted-foreground: 215 20% 70%;
+  --primary: 190 95% 45%;
+  --primary-foreground: 222 47% 7%;
+  --secondary: 217 32% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217 32% 18%;
+  --input: 217 32% 18%;
+  --ring: 190 95% 45%;
+  --radius: 0.75rem;
+}
+.light {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --muted: 210 40% 94%;
+  --muted-foreground: 215 16% 40%;
+  --primary: 191 90% 36%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 94%;
+  --secondary-foreground: 222 47% 11%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 88%;
+  --input: 214 32% 88%;
+  --ring: 191 90% 36%;
+}
+* { @apply border-border; }
+body { @apply bg-background text-foreground antialiased; }
+.leaflet-container { background: #0f172a; color: #0f172a; }
+.command-grid { background-image: radial-gradient(circle at 1px 1px, rgba(34,211,238,.11) 1px, transparent 0); background-size: 26px 26px; }
