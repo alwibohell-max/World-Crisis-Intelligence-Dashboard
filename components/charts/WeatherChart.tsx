@@ -1,0 +1,4 @@
+"use client";
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import type { WeatherForecast } from "@/lib/types";
+export function WeatherChart({ forecast }: { forecast: WeatherForecast }) { const data = forecast.hourly.slice(0, 24).map((h) => ({ time: new Date(h.time).getHours() + ":00", temp: h.temperatureC, rain: h.precipitationMm, wind: h.windKph })); return <div className="h-72"><ResponsiveContainer><AreaChart data={data}><CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,.2)" /><XAxis dataKey="time" /><YAxis /><Tooltip contentStyle={{ background: "#020617", border: "1px solid #334155" }} /><Area dataKey="temp" stroke="#22d3ee" fill="#22d3ee33" /><Area dataKey="rain" stroke="#60a5fa" fill="#60a5fa22" /></AreaChart></ResponsiveContainer></div>; }
