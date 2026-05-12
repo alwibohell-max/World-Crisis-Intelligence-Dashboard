@@ -1,0 +1,2 @@
+import { Card, CardContent } from "@/components/ui/card";
+export function ErrorFallback({ title = "Data source unavailable", message }: { title?: string; message?: string }) { return <Card className="border-destructive/40"><CardContent className="p-5"><div className="font-semibold text-destructive">{title}</div><p className="mt-1 text-sm text-muted-foreground">{message ?? "Showing partial or cached intelligence where available."}</p></CardContent></Card>; }
