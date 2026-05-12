@@ -1,0 +1,5 @@
+import { getLatestEarthquakes } from "@/lib/api/earthquakes";
+import { EarthquakeTable } from "@/components/tables/EarthquakeTable";
+import { CrisisMap } from "@/components/maps/CrisisMap";
+import { MetricCard } from "@/components/cards/MetricCard";
+export default async function EarthquakesPage() { const quakes = await getLatestEarthquakes(4, 14); return <div className="space-y-6"><h1 className="text-3xl font-bold">Earthquake Monitor</h1><div className="grid gap-4 md:grid-cols-4"><MetricCard label="Events" value={quakes.data.length} /><MetricCard label="Max magnitude" value={Math.max(...quakes.data.map(q=>q.magnitude),0).toFixed(1)} /><MetricCard label="Severe+" value={quakes.data.filter(q=>q.risk.score>70).length} /><MetricCard label="Tsunami flags" value={quakes.data.filter(q=>q.tsunami).length} /></div><div className="rounded-lg border p-4 text-sm text-muted-foreground">Filters: magnitude ≥ 4.0 · depth all · last 14 days · all regions. Saved-location proximity warnings are evaluated on saved locations in the browser.</div><CrisisMap earthquakes={quakes.data} /><EarthquakeTable events={quakes.data} /></div>; }
