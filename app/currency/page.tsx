@@ -8,7 +8,7 @@ export default async function CurrencyPage() {
   const series = trend.data;
   const latest = series.at(-1);
   const first = series[0];
-  const change = latest && first ? ((latest.value - first.value) / first.value) * 100 : 0;
+  const change = latest && first && first.value !== 0 ? ((latest.value - first.value) / first.value) * 100 : 0;
 
   return (
     <div className="space-y-6">
